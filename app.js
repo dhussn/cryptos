@@ -1,31 +1,50 @@
-document.getElementById('voucher-form').addEventListener('submit', async function(e) {
-    e.preventDefault();  // Prevent form from submitting normally
+document.getElementById("voucher-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    const voucherCode = document.getElementById('voucher-code').value;
-    const walletAddress = document.getElementById('wallet-address').value;
+    const voucherCode = document.getElementById("voucher-code").value.trim();
+    const walletAddress = document.getElementById("wallet-address").value.trim();
+    const resultElement = document.getElementById("result");
 
-    // Simulate backend communication (you will replace this with an actual API call)
-    const response = await verifyVoucherAndSendCrypto(voucherCode, walletAddress);
-    
-    if (response.success) {
-        document.getElementById('confirmation').classList.remove('hidden');
-    } else {
-        alert("There was an error with your voucher. Please try again.");
+    resultElement.textContent = "Processing...";
+
+    try {
+        // Validate voucher and send crypto
+        const response = await verifyVoucherAndSendCrypto(voucherCode, walletAddress);
+        if (response.success) {
+            resultElement.textContent = `Success! $${response.value} worth of crypto has been sent to ${walletAddress}.`;
+        } else {
+            resultElement.textContent = response.message || "Error processing your request.";
+        }
+    } catch (error) {
+        console.error(error);
+        resultElement.textContent = "An unexpected error occurred. Please try again.";
     }
 });
 
 async function verifyVoucherAndSendCrypto(voucherCode, walletAddress) {
-    // Simulate verifying the voucher and sending crypto to the wallet address.
-    // In a real system, you would call your backend to perform these actions.
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            // Simulate success or failure
-            const success = Math.random() > 0.2;  // 80% chance of success
-            if (success) {
-                resolve({ success: true });
-            } else {
-                resolve({ success: false });
-            }
-        }, 2000);  // Simulate a 2-second delay
-    });
+    try {
+        const response = await fetch('http://localhost:3000/validate-voucher', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ voucherCode })
+        });
+        const data = await response.json();
+
+        if (data.success) {
+            // Simulate sending crypto
+            await sendCrypto(walletAddress, data.value);
+            return { success: true, value: data.value };
+        } else {
+            return { success: false, message: data.message };
+        }
+    } catch (error) {
+        console.error("Error in verifyVoucherAndSendCrypto:", error);
+        return { success: false, message: "Error connecting to the server." };
+    }
+}
+
+async function sendCrypto(walletAddress, amount) {
+    console.log(`Simulating sending $${amount} worth of crypto to ${walletAddress}.`);
+    // Add real Crypto.com API calls here in the future
+    return new Promise((resolve) => setTimeout(resolve, 2000));
 }
