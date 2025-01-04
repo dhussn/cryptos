@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reward to Crypto Conversion</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Crypto Reward Redemption</h1>
+        <p>Enter your voucher code and Crypto wallet address to redeem your reward.</p>
+
+        <!-- Voucher Form -->
+        <form id="voucher-form">
+            <label for="voucher-code">Voucher Code</label>
+            <input type="text" id="voucher-code" required>
+
+            <label for="wallet-address">Crypto Wallet Address</label>
+            <input type="text" id="wallet-address" required>
+
+            <button type="submit" id="submit-button">Submit</button>
+        </form>
+
+        <div id="confirmation" class="hidden">
+            <p>Your crypto reward is being processed. Please check your wallet shortly.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
