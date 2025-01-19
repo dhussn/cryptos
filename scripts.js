@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const serviceID = "service_4b371jn";  // Replace with your EmailJS service ID
     const templateID = "template_y0f3pw9";  // Replace with your EmailJS template ID
-    const userID = "sz2ImWOwFnVKy4qrF";  // Replace with your EmailJS user ID
+    const userID = "imWnpOjfqNpUEUiGn";  // Replace with your EmailJS user ID
 
     // Login Functionality
     document.getElementById('loginBtn').addEventListener('click', () => {
