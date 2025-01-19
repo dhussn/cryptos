@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const businessName = document.getElementById('businessName');
     const businessEmail = document.getElementById('businessEmail');
 
-    const serviceID = "service_4b371jn";  // Replace with your EmailJS service ID
-    const templateID = "template_y0f3pw9";  // Replace with your EmailJS template ID
-    const userID = "sz2ImWOwFnVKy4qrF";  // Replace with your EmailJS user ID
+    const serviceID = "service_4b371jn";
+    const templateID = "template_y0f3pw9";
+    const userID = "sz2ImWOwFnVKy4qrF"; // EmailJS API Key
 
     // Login Functionality
     document.getElementById('loginBtn').addEventListener('click', () => {
@@ -102,8 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
         businessName.value = '';
         businessEmail.value = '';
 
-        // EmailJS Send Email
-        emailjs.send(serviceID, templateID, {
+          // EmailJS Send Email
+        emailjs.send("service_4b371jn", "template_y0f3pw9", {
             name: name,
             email: email,
             voucher_code: voucher,
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Failed to send reward data. Please try again.");
         });
     });
-
+  
     // Back Buttons
     document.getElementById('backToReward').addEventListener('click', () => {
         transactionScreen.classList.add('hidden');
